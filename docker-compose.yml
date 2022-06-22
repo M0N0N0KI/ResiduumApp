@@ -1,0 +1,51 @@
+version: '3.3'
+
+services:
+
+  rdb:
+    image: postgres
+    container_name: rdb
+    ports:
+      - 5432:5432
+    volumes:
+      - residuum_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=RESIDUUM
+      - POSTGRES_USER=residuumdev
+      - POSTGRES_DB=residuumdb
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    networks:
+      - app-networks
+  
+  rapi:
+    build: ./rapi
+    container_name: Residuum-Api
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://rdb:5432/residuumdb
+      - SPRING_DATASOURCE_USERNAME=residuumdev
+      - SPRING_DATASOURCE_PASSWORD=RESIDUUM
+      - SPRING_JPA_HIBERNATE_DLL_AUTO=update
+    ports:
+      - 8080:8080
+    links:
+      - rdb
+    networks:
+      - app-networks
+
+  rfront:
+    build: ./rfront
+    container_name: Residuum-Front
+    ports:
+      - 3000:3000
+    links:
+      - rapi
+    networks:
+      - app-networks
+
+volumes:
+  residuum_db:
+
+networks:
+  app-networks:
+    driver: bridge
+
