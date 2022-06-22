@@ -5,7 +5,7 @@ services:
 ##### Data Base
   rdb:
     image: postgres
-    container_name: Residuum-DB
+    container_name: residuum-db
     restart: always
     ports:
       - 5432:5432
@@ -22,7 +22,7 @@ services:
 ####### API
   rapi:
     build: ./rapi
-    container_name: Residuum-Api
+    container_name: residuum-api
     restart: always
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://rdb:5432/residuumdb
@@ -39,7 +39,7 @@ services:
 ###### Front aplication Terminal
   rfront:
     build: ./rfront
-    container_name: Residuum-Front
+    container_name: residuum-front
     restart: always
     ports:
       - 3000:3000
@@ -55,7 +55,7 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --debug true --cleanup true Residuum-DB Residuum-Api Residuum-Front
+    command: --debug true --cleanup true residuum-db residuum-api residuum-front
 
 volumes:
   residuum_db:
