@@ -1,6 +1,7 @@
 package com.rapi.rapi.models.User;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.rapi.rapi.models.Address.AddressEntity;
+import com.rapi.rapi.models.CollectRequest.CollectrequestEntity;
 import com.rapi.rapi.models.Contact.ContactEntity;
 
 import lombok.Getter;
@@ -50,5 +53,8 @@ public class UserEntity implements Serializable{
     @OneToOne
     @JoinColumn(name = "userr_address")
     private AddressEntity address;
+
+    @ManyToMany
+    private List<CollectrequestEntity> collectrequest;
 
 }
