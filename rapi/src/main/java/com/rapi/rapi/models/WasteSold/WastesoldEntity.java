@@ -31,7 +31,7 @@ public class WastesoldEntity implements Serializable{
     private long id;
 
     @Column(name = "wastesold_type", length = 20)
-    private long type;
+    private String type;
 
     @Column(name = "wastesold_weight", length = 6)
     private String weight;
