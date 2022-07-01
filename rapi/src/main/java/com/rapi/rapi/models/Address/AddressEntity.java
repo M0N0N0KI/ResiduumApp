@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.rapi.rapi.controllers.DTO.Address.AddressDTO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -55,5 +57,21 @@ public class AddressEntity implements Serializable{
 
     @Column(name = "address_longitude")
     private String longitude;
+
+    public AddressEntity(){}
+
+    public AddressEntity(AddressDTO address)
+    {
+        this.street = address.getStreet();
+        this.hnumber = address.getHnumber();
+        this.district = address.getDistrict();
+        this.complement = address.getComplement();
+        this.city = address.getCity();
+        this.state = address.getState();
+        this.country = address.getCountry();
+        this.postalCode = address.getPostalCode();
+        this.latitude = address.getLatitude();
+        this.longitude = address.getLongitude();
+    }
 
 }

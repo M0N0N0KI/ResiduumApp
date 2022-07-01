@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.rapi.rapi.controllers.DTO.Contact.ContactDTO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,5 +36,14 @@ public class ContactEntity implements Serializable{
 
     @Column(name = "contact_cellphone")
     private String cellphone;
+
+    public ContactEntity(){}
+
+    public ContactEntity(ContactDTO contact)
+    {
+        this.email = contact.getEmail();
+        this.telephone = contact.getTelephone();
+        this.cellphone = contact.getCellphone();
+    }
 
 }
