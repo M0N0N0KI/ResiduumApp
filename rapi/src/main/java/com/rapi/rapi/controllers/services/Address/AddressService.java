@@ -86,4 +86,11 @@ public class AddressService {
         return ResponseEntity.ok("Endereco Atualizado");
     }
 
+    public ResponseEntity GetAddressById(Long id)
+    {
+        Optional<AddressEntity> search = repo.findById(id);
+        AddressDTO response = new AddressDTO(search.get());
+        return ResponseEntity.ok(response);
+    }
+
 }
