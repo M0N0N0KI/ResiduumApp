@@ -23,7 +23,7 @@ public class ContactService {
     {
         ContactEntity entity = new ContactEntity(data);
         ContactEntity response = repo.save(entity);
-        return(response != null)?response:null;
+        return response;
     }
 
     public ResponseEntity addContact(ContactDTO data, long id)
@@ -61,6 +61,12 @@ public class ContactService {
         Optional<ContactEntity> search = repo.findById(id);
         ContactDTO response = new ContactDTO(search.get());
         return ResponseEntity.ok(response);
+    }
+
+    public ContactEntity GetContactByID(Long id)
+    {
+        Optional<ContactEntity> search = repo.findById(id);
+        return search.get();
     }
 
 }

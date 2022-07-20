@@ -93,4 +93,10 @@ public class AddressService {
         return ResponseEntity.ok(response);
     }
 
+    public AddressEntity GetAddressByID(Long id)
+    {
+        Optional<AddressEntity> search = repo.findById(id);
+        return search.get();
+    }
+
 }
