@@ -13,7 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.rapi.rapi.controllers.DTO.Personal.PersonalSDTO;
 import com.rapi.rapi.controllers.DTO.User.UserSDTO;
 import com.rapi.rapi.controllers.services.Address.AddressService;
 import com.rapi.rapi.controllers.services.Contact.ContactService;
