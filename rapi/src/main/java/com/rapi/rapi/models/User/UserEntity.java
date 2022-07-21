@@ -13,8 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import com.rapi.rapi.controllers.DTO.Personal.PersonalSDTO;
 import com.rapi.rapi.controllers.DTO.User.UserSDTO;
 import com.rapi.rapi.controllers.services.Address.AddressService;
 import com.rapi.rapi.controllers.services.Contact.ContactService;
@@ -63,6 +62,7 @@ public class UserEntity implements Serializable{
     private List<CollectrequestEntity> collectrequest;
 
     public UserEntity(){}
+
     public UserEntity(UserSDTO user)
     {
 

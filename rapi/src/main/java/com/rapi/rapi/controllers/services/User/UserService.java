@@ -90,5 +90,11 @@ public class UserService {
             return ResponseEntity.ok(response);
         }
     }
+
+    public UserEntity GetUser(Long id)
+    {
+        Optional<UserEntity> search = repo.findById(id);
+        return(search.isEmpty())?null:search.get();
+    } 
     
 }

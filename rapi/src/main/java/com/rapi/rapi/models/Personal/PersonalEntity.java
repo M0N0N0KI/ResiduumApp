@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.rapi.rapi.controllers.DTO.Personal.PersonalSDTO;
+import com.rapi.rapi.controllers.services.User.UserService;
 import com.rapi.rapi.models.User.UserEntity;
 
 import lombok.Getter;
@@ -36,5 +38,31 @@ public class PersonalEntity implements Serializable{
     @OneToOne
     @JoinColumn(name = "personal_user")
     private UserEntity user;
+
+    public PersonalEntity(){}
+
+    public PersonalEntity(UserEntity user)
+    {
+        if(user != null)
+        {
+            this.setScore("0");
+            this.setUser(user);
+        }
+    }
+
+    public PersonalEntity(PersonalSDTO user)
+    {
+        UserService userserv = new UserService();
+
+        if(user.getScore() != null)this.setScore(user.getScore());
+        if(user.getIdentifier() != null)
+        {
+            if(!userserv.searchExistence(user.getIdentifier()))
+            {
+                this.setUser(userserv.GetUser(user.getUserid()));
+            }
+        }
+
+    }
     
 }
