@@ -1,6 +1,7 @@
 package com.rapi.rapi.models.Colletedwaste;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.rapi.rapi.controllers.DTO.CollectedWaste.CollectedwasteSDTO;
 import com.rapi.rapi.models.CollectReport.CollectreportEntity;
+import com.rapi.rapi.models.CollectReport.CollectreportRepo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -42,5 +45,22 @@ public class ColletedwasteEntity implements Serializable{
     @ManyToOne
     @JoinColumn(name = "colletedwaste_report")
     private CollectreportEntity report;
+
+    public ColletedwasteEntity(){}
+
+    public ColletedwasteEntity(CollectedwasteSDTO colletedwaste)
+    {
+
+        if(colletedwaste != null)
+        {
+            this.setId(colletedwaste.getId());
+            this.setType(colletedwaste.getType());
+            this.setWeight(colletedwaste.getWeight());
+            this.setRiskrating(colletedwaste.getRiskrating());
+            /**
+             * Adicionar O Relatorio
+             */
+        }
+    }
     
 }
