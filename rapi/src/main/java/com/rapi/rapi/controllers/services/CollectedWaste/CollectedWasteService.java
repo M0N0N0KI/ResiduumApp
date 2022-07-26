@@ -1,5 +1,6 @@
 package com.rapi.rapi.controllers.services.CollectedWaste;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,15 @@ public class CollectedWasteService {
         {
             return ResponseEntity.ok("Erro ao atualizar Dados");
         }
+    }
+
+    public List<Long> ListofWasteid(Long id)
+    {
+        return repo.listIDbyReport(id);
+    }
+    public List<ColletedwasteEntity> ListofWaste(Long id)
+    {
+        return null;
     }
     
 }
