@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.rapi.rapi.controllers.DTO.CollectReport.CollectreportSDTO;
+import com.rapi.rapi.controllers.services.CollectRequest.CollectRequestService;
 import com.rapi.rapi.controllers.services.CollectedWaste.CollectedWasteService;
 import com.rapi.rapi.models.CollectRequest.CollectrequestEntity;
 import com.rapi.rapi.models.Colletedwaste.ColletedwasteEntity;
@@ -61,12 +62,14 @@ public class CollectreportEntity implements Serializable{
         if(report != null)
         {
             CollectedWasteService cwasteserv = new CollectedWasteService();
+            CollectRequestService requestserv = new CollectRequestService();
 
             this.setId(report.getId());
             this.setStatus(report.getStatus());
             this.setExecutiondate(report.getExecutiondate());
+            this.setRequest(requestserv.GetRequest(report.getRequest()));
             /**
-             * insert request, destiny
+             *insert destiny
              */
             this.setWastes(cwasteserv.ListofWaste(report.getId()));
         }

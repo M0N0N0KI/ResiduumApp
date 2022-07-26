@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.rapi.rapi.controllers.DTO.CollectRequest.CollectrequestSDTO;
+import com.rapi.rapi.controllers.services.Address.AddressService;
 import com.rapi.rapi.models.Address.AddressEntity;
 import com.rapi.rapi.models.User.UserEntity;
 
@@ -44,5 +46,23 @@ public class CollectrequestEntity implements Serializable{
 
     @ManyToMany
     private List<UserEntity> applicant;
+
+    public CollectrequestEntity(){}
+
+    public CollectrequestEntity(CollectrequestSDTO request)
+    {
+        if(request != null)
+        {
+            AddressService addressserv = new AddressService();
+
+            this.setId(request.getId());
+            this.setStatus(request.getStatus());
+            this.setRequestdate(request.getRequestdate());
+            this.setCollectlocation(addressserv.GetAddressByID(request.getCollectlocation()));
+            /**
+             * Insert applicants
+             */
+        }
+    }
 
 }
