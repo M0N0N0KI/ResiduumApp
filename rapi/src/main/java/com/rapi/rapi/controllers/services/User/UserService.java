@@ -1,6 +1,9 @@
 package com.rapi.rapi.controllers.services.User;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.rapi.rapi.controllers.DTO.Auth.AuthDTO;
 import com.rapi.rapi.controllers.DTO.User.UserSDTO;
+import com.rapi.rapi.models.CollectRequest.CollectrequestEntity;
 import com.rapi.rapi.models.User.UserEntity;
 import com.rapi.rapi.models.User.UserRepo;
 
@@ -95,6 +99,48 @@ public class UserService {
     {
         Optional<UserEntity> search = repo.findById(id);
         return(search.isEmpty())?null:search.get();
-    } 
+    }
+
+    public Set<CollectrequestEntity> listRequestbyUser(Long id)
+    {
+        Optional<UserEntity> search = repo.findById(id);
+        if(search.isPresent())
+        {
+            UserEntity user = search.get();
+            return(user.getCollectrequest() != null)
+                ?user.getCollectrequest()
+                :null;
+        }
+        else
+        {
+            return null;
+        }
+    }
     
+    public List<Long> listRequestIdsbyUser(Long id)
+    {
+        Optional<UserEntity> search = repo.findById(id);
+        if(search.isPresent())
+        {
+            UserEntity user = search.get();
+            if(user.getCollectrequest() != null)
+            {
+                List<Long> ids = new ArrayList<>();
+                for(CollectrequestEntity request : user.getCollectrequest())
+                {
+                    ids.add(request.getId());
+                }
+                return ids;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 }

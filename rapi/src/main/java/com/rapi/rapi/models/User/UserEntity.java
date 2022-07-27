@@ -1,7 +1,7 @@
 package com.rapi.rapi.models.User;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import com.rapi.rapi.controllers.DTO.User.UserSDTO;
 import com.rapi.rapi.controllers.services.Address.AddressService;
 import com.rapi.rapi.controllers.services.Contact.ContactService;
+import com.rapi.rapi.controllers.services.User.UserService;
 import com.rapi.rapi.models.Address.AddressEntity;
 import com.rapi.rapi.models.CollectRequest.CollectrequestEntity;
 import com.rapi.rapi.models.Contact.ContactEntity;
@@ -57,8 +58,8 @@ public class UserEntity implements Serializable{
     @JoinColumn(name = "userr_address")
     private AddressEntity address;
 
-    @ManyToMany
-    private List<CollectrequestEntity> collectrequest;
+    @ManyToMany(mappedBy = "userr")
+    private Set<CollectrequestEntity> collectrequest;
 
     public UserEntity(){}
 
@@ -67,13 +68,16 @@ public class UserEntity implements Serializable{
 
         ContactService contactserv = new ContactService();
         AddressService addressserv = new AddressService();
-
+        UserService userserv = new UserService();
+        
+        this.setId(user.getId());
         if(user.getName() != null)this.setName(user.getName());
         if(user.getIdentifier() != null)this.setIdentifier(user.getIdentifier());
         if(user.getPassword() != null)this.setPassword(user.getPassword());
         if(user.getStatus() != null)this.setStatus(user.getStatus());
         if(user.getContact() != null)this.setContact(contactserv.GetContactByID(user.getContact()));
         if(user.getAddress() != null)this.setAddress(addressserv.GetAddressByID(user.getAddress()));
+        this.setCollectrequest(userserv.listRequestbyUser(user.getId()));
 
     }
 
