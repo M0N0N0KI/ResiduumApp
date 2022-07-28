@@ -11,6 +11,7 @@ import lombok.Setter;
 public class CertificateCDTO {
     
     private long id;
+    private String number;
     private String weight;
     private String wastetype;
     private String status;

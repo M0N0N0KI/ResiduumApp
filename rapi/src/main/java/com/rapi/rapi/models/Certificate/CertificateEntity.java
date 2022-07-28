@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.rapi.rapi.controllers.DTO.Certificate.CertificateSDTO;
 import com.rapi.rapi.models.Cooperative.CooperativeEntity;
 
 import lombok.Getter;
@@ -30,6 +31,9 @@ public class CertificateEntity implements Serializable{
     @Column(name = "certificate_id")
     private long id;
 
+    @Column(name = "certificate_number", length = 30)
+    private String number;
+
     @Column(name = "certificate_weight")
     private String weight;
 
@@ -45,5 +49,23 @@ public class CertificateEntity implements Serializable{
     @ManyToOne
     @JoinColumn(name = "certificate_origin", nullable = false)
     private CooperativeEntity origin;
+
+    public CertificateEntity(){}
+
+    public CertificateEntity(CertificateSDTO certificate)
+    {
+        if(certificate != null)
+        {
+            this.setId(certificate.getId());
+            this.setNumber(certificate.getNumber());
+            this.setWeight(certificate.getWeight());
+            this.setWastetype(certificate.getWastetype());
+            this.setStatus(certificate.getStatus());
+            this.setDestiny(certificate.getDestiny());
+            /**
+             * Insert Origin
+             */
+        }
+    }
 
 }
