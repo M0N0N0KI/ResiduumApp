@@ -52,7 +52,7 @@ public class CollectreportEntity implements Serializable{
     @JoinColumn(name = "collectreport_destiny")
     private CooperativeEntity destiny;
 
-    @OneToMany
+    @OneToMany(mappedBy = "report")
     private List<ColletedwasteEntity> wastes;
 
     public CollectreportEntity(){}

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.rapi.rapi.controllers.DTO.AvailableWaste.AvailablewasteSDTO;
 import com.rapi.rapi.models.Cooperative.CooperativeEntity;
 
 import lombok.Getter;
@@ -40,7 +41,23 @@ public class AvailablewasteEntity implements Serializable{
     private String riskrating;
 
     @ManyToOne
-    @JoinColumn(name = "availablewaste_owner")
+    @JoinColumn(name="availablewaste_owner", nullable = false)
     private CooperativeEntity owner;
+
+    public AvailablewasteEntity(){}
+
+    public AvailablewasteEntity(AvailablewasteSDTO awaste)
+    {
+        if(awaste != null)
+        {
+            this.setId(awaste.getId());
+            this.setType(awaste.getType());
+            this.setWeight(awaste.getWeight());
+            this.setRiskrating(awaste.getRiskrating());
+            /**
+             * include owner
+             */
+        }
+    }
     
 }

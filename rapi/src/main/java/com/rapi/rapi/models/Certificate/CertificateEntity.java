@@ -43,7 +43,7 @@ public class CertificateEntity implements Serializable{
     private String destiny;
 
     @ManyToOne
-    @JoinColumn(name = "certificate_origin")
+    @JoinColumn(name = "certificate_origin", nullable = false)
     private CooperativeEntity origin;
 
 }

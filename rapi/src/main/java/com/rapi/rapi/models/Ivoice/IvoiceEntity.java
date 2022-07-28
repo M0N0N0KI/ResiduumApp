@@ -40,10 +40,10 @@ public class IvoiceEntity implements Serializable{
     private String applicant;
 
     @ManyToOne
-    @JoinColumn(name = "ivoice_issuer")
+    @JoinColumn(name = "ivoice_issuer", nullable = false)
     private CooperativeEntity issuer;
 
-    @OneToMany
+    @OneToMany(mappedBy = "ivoice")
     private List<WastesoldEntity> wastesold;
 
 }

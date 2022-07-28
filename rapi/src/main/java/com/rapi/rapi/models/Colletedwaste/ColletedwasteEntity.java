@@ -42,7 +42,7 @@ public class ColletedwasteEntity implements Serializable{
     private String riskrating;
 
     @ManyToOne
-    @JoinColumn(name = "colletedwaste_report")
+    @JoinColumn(name = "colletedwaste_report", nullable = false)
     private CollectreportEntity report;
 
     public ColletedwasteEntity(){}

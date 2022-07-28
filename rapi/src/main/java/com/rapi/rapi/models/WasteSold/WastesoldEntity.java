@@ -43,7 +43,7 @@ public class WastesoldEntity implements Serializable{
     private String price;
 
     @ManyToOne
-    @JoinColumn(name = "wastesold_ivoice")
+    @JoinColumn(name = "wastesold_ivoice", nullable = false)
     private IvoiceEntity ivoice;
     
 }
