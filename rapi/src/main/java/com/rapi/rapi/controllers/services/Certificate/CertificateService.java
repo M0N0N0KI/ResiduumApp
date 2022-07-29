@@ -55,7 +55,7 @@ public class CertificateService {
         CertificateSDTO response = new CertificateSDTO(GetCertificate(id));
         return(response != null)
             ?ResponseEntity.ok(response)
-            :ResponseEntity.ok("Erro ao Cadastrar Certificado");
+            :ResponseEntity.ok("Erro ao Recuperar Certificado");
     }
 
     public ResponseEntity UpdateCertificate(CertificateSDTO certificate)

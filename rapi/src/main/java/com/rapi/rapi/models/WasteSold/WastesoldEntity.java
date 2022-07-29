@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.rapi.rapi.controllers.DTO.WasteSold.WastesoldSDTO;
 import com.rapi.rapi.models.Ivoice.IvoiceEntity;
 
 import lombok.Getter;
@@ -45,5 +46,22 @@ public class WastesoldEntity implements Serializable{
     @ManyToOne
     @JoinColumn(name = "wastesold_ivoice", nullable = false)
     private IvoiceEntity ivoice;
+
+    public WastesoldEntity(){}
+
+    public WastesoldEntity(WastesoldSDTO wsold)
+    {
+        if(wsold != null)
+        {
+            this.setId(wsold.getId());
+            this.setType(wsold.getType());
+            this.setWeight(wsold.getWeight());
+            this.setRiskrating(wsold.getRiskrating());
+            this.setPrice(wsold.getPrice());
+            /**
+             * insert ivoice
+             */
+        }
+    }
     
 }
