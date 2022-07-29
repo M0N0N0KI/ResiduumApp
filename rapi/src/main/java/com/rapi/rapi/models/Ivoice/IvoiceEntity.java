@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.rapi.rapi.controllers.DTO.Ivoice.IvoiceSDTO;
+import com.rapi.rapi.controllers.services.Ivoice.IvoiceService;
 import com.rapi.rapi.models.Cooperative.CooperativeEntity;
 import com.rapi.rapi.models.WasteSold.WastesoldEntity;
 
@@ -33,8 +35,8 @@ public class IvoiceEntity implements Serializable{
     @Column(name = "ivoice_id")
     private long id;
 
-    @Column(name = "ivoice_issuenumber")
-    private long issuenumber;
+    @Column(name = "ivoice_issuenumber", length = 50)
+    private String issuenumber;
 
     @Column(name ="ivoice_applicant")
     private String applicant;
@@ -45,5 +47,24 @@ public class IvoiceEntity implements Serializable{
 
     @OneToMany(mappedBy = "ivoice")
     private List<WastesoldEntity> wastesold;
+
+    public IvoiceEntity(){}
+
+    public IvoiceEntity(IvoiceSDTO ivoice)
+    {
+        if(ivoice != null)
+        {
+            IvoiceService ivoiceserv = new IvoiceService();
+
+            this.setId(ivoice.getId());
+            this.setIssuenumber(ivoice.getIssuenumber());
+            this.setApplicant(ivoice.getApplicant());
+            /**
+             * Insert issuer
+             */
+            this.setWastesold(ivoiceserv.ListWasteSold(ivoice.getId()));
+
+        }
+    }
 
 }

@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.rapi.rapi.controllers.DTO.WasteSold.WastesoldSDTO;
+import com.rapi.rapi.controllers.services.Ivoice.IvoiceService;
 import com.rapi.rapi.models.Ivoice.IvoiceEntity;
 
 import lombok.Getter;
@@ -53,14 +54,14 @@ public class WastesoldEntity implements Serializable{
     {
         if(wsold != null)
         {
+            IvoiceService ivoiceserv = new IvoiceService();
+
             this.setId(wsold.getId());
             this.setType(wsold.getType());
             this.setWeight(wsold.getWeight());
             this.setRiskrating(wsold.getRiskrating());
             this.setPrice(wsold.getPrice());
-            /**
-             * insert ivoice
-             */
+            this.setIvoice(ivoiceserv.GetIvoice(wsold.getIvoice()));
         }
     }
     
