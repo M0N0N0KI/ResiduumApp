@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.rapi.rapi.controllers.DTO.Cooperative.CooperativeSDTO;
+import com.rapi.rapi.controllers.services.Cooperative.CooperativeService;
+import com.rapi.rapi.controllers.services.User.UserService;
 import com.rapi.rapi.models.AvailableWaste.AvailablewasteEntity;
 import com.rapi.rapi.models.Certificate.CertificateEntity;
 import com.rapi.rapi.models.Ivoice.IvoiceEntity;
@@ -45,5 +48,22 @@ public class CooperativeEntity implements Serializable{
 
     @OneToMany(mappedBy = "issuer")
     private List<IvoiceEntity> ivoicedissued;
+
+    public CooperativeEntity(){}
+
+    public CooperativeEntity(CooperativeSDTO cooperative)
+    {
+        if(cooperative != null)
+        {
+            UserService userserv = new UserService();
+            CooperativeService coopserv = new CooperativeService();
+
+            this.setId(cooperative.getId());
+            this.setUser(userserv.GetUser(cooperative.getUserid()));
+            this.setAvailablewaste(coopserv.listofAvailableWaste(cooperative.getId()));
+            this.setCertificatesissued(coopserv.listofCertificate(cooperative.getId()));
+            this.setIvoicedissued(coopserv.listofIvoices(cooperative.getId()));
+        }
+    }
 
 }
