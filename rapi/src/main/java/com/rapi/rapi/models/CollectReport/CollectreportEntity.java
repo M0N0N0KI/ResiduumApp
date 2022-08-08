@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import com.rapi.rapi.controllers.DTO.CollectReport.CollectreportSDTO;
 import com.rapi.rapi.controllers.services.CollectRequest.CollectRequestService;
 import com.rapi.rapi.controllers.services.CollectedWaste.CollectedWasteService;
+import com.rapi.rapi.controllers.services.Cooperative.CooperativeService;
 import com.rapi.rapi.models.CollectRequest.CollectrequestEntity;
 import com.rapi.rapi.models.Colletedwaste.ColletedwasteEntity;
 import com.rapi.rapi.models.Cooperative.CooperativeEntity;
@@ -63,14 +64,13 @@ public class CollectreportEntity implements Serializable{
         {
             CollectedWasteService cwasteserv = new CollectedWasteService();
             CollectRequestService requestserv = new CollectRequestService();
+            CooperativeService coopserv = new CooperativeService();
 
             this.setId(report.getId());
             this.setStatus(report.getStatus());
             this.setExecutiondate(report.getExecutiondate());
             this.setRequest(requestserv.GetRequest(report.getRequest()));
-            /**
-             *insert destiny
-             */
+            this.setDestiny(coopserv.GetCooperative(report.getDestiny()));
             this.setWastes(cwasteserv.ListofWaste(report.getId()));
         }
     }

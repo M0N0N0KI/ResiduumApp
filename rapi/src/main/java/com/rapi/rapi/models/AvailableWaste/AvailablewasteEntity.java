@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.rapi.rapi.controllers.DTO.AvailableWaste.AvailablewasteSDTO;
+import com.rapi.rapi.controllers.services.Cooperative.CooperativeService;
 import com.rapi.rapi.models.Cooperative.CooperativeEntity;
 
 import lombok.Getter;
@@ -50,13 +51,13 @@ public class AvailablewasteEntity implements Serializable{
     {
         if(awaste != null)
         {
+            CooperativeService coopserv = new CooperativeService();
+
             this.setId(awaste.getId());
             this.setType(awaste.getType());
             this.setWeight(awaste.getWeight());
             this.setRiskrating(awaste.getRiskrating());
-            /**
-             * include owner
-             */
+            this.setOwner(coopserv.GetCooperative(awaste.getOwner()));
         }
     }
     

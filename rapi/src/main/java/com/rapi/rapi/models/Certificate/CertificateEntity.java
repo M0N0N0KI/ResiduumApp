@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.rapi.rapi.controllers.DTO.Certificate.CertificateSDTO;
+import com.rapi.rapi.controllers.services.Cooperative.CooperativeService;
 import com.rapi.rapi.models.Cooperative.CooperativeEntity;
 
 import lombok.Getter;
@@ -56,15 +57,15 @@ public class CertificateEntity implements Serializable{
     {
         if(certificate != null)
         {
+            CooperativeService coopserv = new CooperativeService();
+
             this.setId(certificate.getId());
             this.setNumber(certificate.getNumber());
             this.setWeight(certificate.getWeight());
             this.setWastetype(certificate.getWastetype());
             this.setStatus(certificate.getStatus());
             this.setDestiny(certificate.getDestiny());
-            /**
-             * Insert Origin
-             */
+            this.setOrigin(coopserv.GetCooperative(certificate.getOrigin()));
         }
     }
 

@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.rapi.rapi.controllers.DTO.Ivoice.IvoiceSDTO;
+import com.rapi.rapi.controllers.services.Cooperative.CooperativeService;
 import com.rapi.rapi.controllers.services.Ivoice.IvoiceService;
 import com.rapi.rapi.models.Cooperative.CooperativeEntity;
 import com.rapi.rapi.models.WasteSold.WastesoldEntity;
@@ -55,13 +56,12 @@ public class IvoiceEntity implements Serializable{
         if(ivoice != null)
         {
             IvoiceService ivoiceserv = new IvoiceService();
+            CooperativeService coopserv = new CooperativeService();
 
             this.setId(ivoice.getId());
             this.setIssuenumber(ivoice.getIssuenumber());
             this.setApplicant(ivoice.getApplicant());
-            /**
-             * Insert issuer
-             */
+            this.setIssuer(coopserv.GetCooperative(ivoice.getIssuer()));
             this.setWastesold(ivoiceserv.ListWasteSold(ivoice.getId()));
 
         }
