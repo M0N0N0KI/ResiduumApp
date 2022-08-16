@@ -2,5 +2,20 @@
     "cSpell.words": [
         "Configurer"
     ],
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Residuum-DB",
+            "database": "residuum-db",
+            "username": "root",
+            "password": "RESIDUUM"
+        }
+    ]
 }
